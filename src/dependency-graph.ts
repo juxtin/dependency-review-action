@@ -25,7 +25,7 @@ export async function compare({
     basehead: `${baseRef}...${headRef}`
   }
   // log the params
-  core.debug(`compare params: ${JSON.stringify(params)}`)
+  console.log(`compare params: ${JSON.stringify(params)}`)
   const changes = await octo.paginate(
     'GET /repos/{owner}/{repo}/dependency-graph/compare/{basehead}',
     {
