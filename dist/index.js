@@ -184,6 +184,13 @@ const retryingOctokit = githubUtils.GitHub.plugin(retry.retry);
 const octo = new retryingOctokit(githubUtils.getOctokitOptions(core.getInput('repo-token', { required: true })));
 function compare({ owner, repo, baseRef, headRef }) {
     return __awaiter(this, void 0, void 0, function* () {
+        const params = {
+            owner: owner,
+            repo: repo,
+            basehead: `${baseRef}...${headRef}`
+        };
+        // log the params
+        console.log(`compare params: ${JSON.stringify(params)}`);
         const changes = yield octo.paginate('GET /repos/{owner}/{repo}/dependency-graph/compare/{basehead}', {
             owner,
             repo,
